@@ -10,6 +10,7 @@ require (
 	github.com/go-playground/validator/v10 v10.12.0
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/golang-jwt/jwt/v5 v5.0.0
+	github.com/lib/pq v1.10.9
 	github.com/matoous/go-nanoid/v2 v2.0.0
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d
 	github.com/sirupsen/logrus v1.9.0
