@@ -1,0 +1,38 @@
+stage: "local"
+origins: ["http://localhost"]
+domain: "localhost"
+mock:
+  otp: "123456"
+httpserver:
+  host: "localhost"
+  port: "8080"
+db:
+  user: "postgres"
+  password: "4f0719c241938855d7cdd5935f52bb9e"
+  name: "airbnb-user"
+  host: "localhost"
+  port: "5433"
+  sslmode: "disable"
+  timezone: "Asia/Jakarta"
+cache:
+  auth:
+    host: "localhost:6379"
+    password: "18be2c8f80d066f352e778be5a2d8691"
+    db: 0
+  otp:
+    host: "localhost:6379"
+    password: "18be2c8f80d066f352e778be5a2d8691"
+    db: 0
+jwt:
+  # example using https://generate-secret.now.sh/32
+  secret: 0d54ea58c1ff77817e1bd66c5f448eed
+kafka:
+  clientid: "airbnb-consumer"
+  brokers: ["localhost:9092"]
+  version: "2.1.1"
+  consumer:
+    group: "airbnb"
+    assigner: "range"
+    isuseoldest: true
+    router:
+      separator: "."
