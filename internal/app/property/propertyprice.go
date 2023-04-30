@@ -1,4 +1,4 @@
-package room
+package property
 
 import (
 	"github.com/Rhymond/go-money"
