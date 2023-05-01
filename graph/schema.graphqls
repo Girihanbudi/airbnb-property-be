@@ -1,0 +1,30 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+scalar Time
+
+# Metadata
+type Pagination {
+  limit: Int
+  page: Int
+  pageSize: Int
+}
+
+# Property
+type PropertyType {
+  code: String!
+  name: String!
+  link: String
+  createdAt: Time!
+  updatedAt: Time!
+}
+
+type PropertyTypes {
+  data: [PropertyType!]!
+  meta: Pagination
+}
+
+type Query {
+  propertyTypes(limit: Int, page: Int): PropertyTypes
+}
