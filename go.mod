@@ -3,7 +3,7 @@ module airbnb-property-be
 go 1.19
 
 require (
-	github.com/99designs/gqlgen v0.17.30
+	github.com/99designs/gqlgen v0.17.25
 	github.com/Shopify/sarama v1.38.1
 	github.com/aws/aws-sdk-go v1.44.249
 	github.com/gin-contrib/cors v1.4.0
@@ -17,7 +17,9 @@ require (
 	github.com/spf13/viper v1.15.0
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
+	github.com/swaggo/swag v1.8.12
 	github.com/thoas/go-funk v0.9.3
+	github.com/vektah/gqlparser/v2 v2.5.1
 	golang.org/x/crypto v0.7.0
 )
 
@@ -77,10 +79,8 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
-	github.com/swaggo/swag v1.8.12 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.9 // indirect
-	github.com/vektah/gqlparser/v2 v2.5.1 // indirect
 	golang.org/x/arch v0.0.0-20210923205945-b76863e36670 // indirect
 	golang.org/x/sys v0.7.0 // indirect
 	golang.org/x/term v0.7.0 // indirect
