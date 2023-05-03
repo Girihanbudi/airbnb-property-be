@@ -5,5 +5,9 @@ import (
 )
 
 type Config struct {
-	Bucket bucket.Config `mapstructure:"bucket"`
+	AccessKey string        `mapstructure:"accesskey"`
+	SecretKey string        `mapstructure:"secretkey"`
+	Region    string        `mapstructure:"region"`
+	Url       string        `mapstructure:"url"`
+	Bucket    bucket.Config `mapstructure:"bucket"`
 }

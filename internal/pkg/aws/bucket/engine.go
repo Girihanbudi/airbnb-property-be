@@ -22,7 +22,7 @@ func (e *Engine) Upload(file []byte, groups ...string) (*string, error) {
 	// Upload the file to S3.
 	_, err = e.Uploader.Upload(&s3manager.UploadInput{
 		ACL:    aws.String("public-read"),
-		Bucket: aws.String(e.Bucket),
+		Bucket: aws.String(e.Name),
 		Key:    aws.String(name),
 		Body:   reader,
 	})
@@ -38,7 +38,7 @@ func (e *Engine) Download(fileName string) (*[]byte, error) {
 
 	// Write the contents of S3 Object to the file
 	_, err := e.Downloader.Download(buff, &s3.GetObjectInput{
-		Bucket: aws.String(e.Bucket),
+		Bucket: aws.String(e.Name),
 		Key:    aws.String(fileName),
 	})
 	if err != nil {
