@@ -34,3 +34,10 @@ kafka:
     isuseoldest:
     router:
       separator:
+aws:
+  region:
+  accesskey:
+  secretkey:
+  url:
+  bucket:
+    name:
