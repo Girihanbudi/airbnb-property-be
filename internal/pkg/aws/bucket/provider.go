@@ -10,7 +10,7 @@ import (
 
 type Options struct {
 	config.Config
-	AwsConstruct *aws.Construct
+	AwsClient *aws.Aws
 }
 
 type Engine struct {
@@ -24,13 +24,13 @@ const Instance string = "AWS Bucket"
 
 func NewBucket(options Options) *Engine {
 	// Create bucket services
-	service := s3.New(options.AwsConstruct.Session)
+	service := s3.New(options.AwsClient.Session)
 
 	// Create an uploader with the session and default options
-	uploader := s3manager.NewUploader(options.AwsConstruct.Session)
+	uploader := s3manager.NewUploader(options.AwsClient.Session)
 
 	// Create a downloader with the session and default options
-	downloader := s3manager.NewDownloader(options.AwsConstruct.Session)
+	downloader := s3manager.NewDownloader(options.AwsClient.Session)
 
 	return &Engine{
 		Options:    options,

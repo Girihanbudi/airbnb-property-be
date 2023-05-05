@@ -9,7 +9,8 @@ import (
 
 var PackageSet = wire.NewSet(
 	wire.Struct(new(aws.Options), "*"),
-	aws.NewConstruct,
+	aws.NewAwsClient,
+
 	wire.Struct(new(bucket.Options), "*"),
 	bucket.NewBucket,
 )

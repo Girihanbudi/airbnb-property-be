@@ -2,7 +2,6 @@ package aws
 
 import (
 	"airbnb-property-be/internal/pkg/aws/config"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -13,12 +12,12 @@ type Options struct {
 	config.Config
 }
 
-type Construct struct {
+type Aws struct {
 	Options
 	Session *session.Session
 }
 
-func NewConstruct(options Options) *Construct {
+func NewAwsClient(options Options) *Aws {
 	// The session the S3 Uploader will use
 	sess := session.Must(session.NewSession(
 		&aws.Config{
@@ -34,9 +33,7 @@ func NewConstruct(options Options) *Construct {
 		},
 	))
 
-	fmt.Println("aws sessions =====", options.AccessKey, "secret", options.SecretKey)
-
-	return &Construct{
+	return &Aws{
 		Options: options,
 		Session: sess,
 	}
