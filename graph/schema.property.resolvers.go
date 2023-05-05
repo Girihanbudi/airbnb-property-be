@@ -6,12 +6,42 @@ package graph
 
 import (
 	"airbnb-property-be/graph/model"
+	"airbnb-property-be/internal/app/property/preset/response"
 	"context"
-	"fmt"
+
+	"github.com/thoas/go-funk"
 )
 
 // PropertyTypes is the resolver for the propertyTypes field.
 func (r *queryResolver) PropertyTypes(ctx context.Context, limit *int, page *int) (*model.PropertyTypes, error) {
-	r.Property.GetPropertyTypes(ctx, limit, page)
-	panic(fmt.Errorf("not implemented: PropertyTypes - propertyTypes"))
+	data, err := r.Resolver.Property.GetPropertyTypes(ctx, limit, page)
+	if err != nil {
+		return nil, err
+	}
+
+	propertyTypes := funk.Map(*data.PropertyTypes, func(data response.PropertyType) *model.PropertyType {
+		var propertyType model.PropertyType
+
+		propertyType.Code = data.Code
+		propertyType.Link = &data.Link
+		propertyType.Name = data.Name
+		propertyType.CreatedAt = data.CreatedAt
+		propertyType.UpdatedAt = data.UpdatedAt
+
+		return &propertyType
+	}).([]*model.PropertyType)
+
+	pagination := data.Pagination
+	meta := model.Pagination{
+		Limit:    &pagination.Limit,
+		Page:     &pagination.Page,
+		PageSize: &pagination.PageSize,
+	}
+
+	response := model.PropertyTypes{
+		Data: propertyTypes,
+		Meta: &meta,
+	}
+
+	return &response, nil
 }

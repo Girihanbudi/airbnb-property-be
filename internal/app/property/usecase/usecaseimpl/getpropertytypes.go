@@ -22,7 +22,7 @@ func (u Usecase) GetPropertyTypes(ctx context.Context, cmd request.GetPropertyTy
 		return
 	}
 
-	res.PropertyTypes = funk.Map(propertyTypes, func(data module.PropertyType) response.PropertyType {
+	data := funk.Map(*propertyTypes, func(data module.PropertyType) response.PropertyType {
 		var propertyType response.PropertyType
 
 		propertyType.Code = data.Code
@@ -32,7 +32,9 @@ func (u Usecase) GetPropertyTypes(ctx context.Context, cmd request.GetPropertyTy
 		propertyType.UpdatedAt = data.UpdatedAt
 
 		return propertyType
-	}).(*[]response.PropertyType)
+	}).([]response.PropertyType)
+
+	res.PropertyTypes = &data
 	res.Pagination = &cmd.Pagination
 
 	return
