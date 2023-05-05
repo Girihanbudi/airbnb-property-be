@@ -12,6 +12,7 @@ import (
 	repoimpl2 "airbnb-property-be/internal/app/property/repo/repoimpl"
 	"airbnb-property-be/internal/app/property/usecase/usecaseimpl"
 	"airbnb-property-be/internal/app/translation/repo/repoimpl"
+	"airbnb-property-be/internal/pkg/aws"
 	"airbnb-property-be/internal/pkg/aws/bucket"
 	"airbnb-property-be/internal/pkg/env"
 	"airbnb-property-be/internal/pkg/env/tool"
@@ -76,8 +77,14 @@ func NewApp() (*App, error) {
 	}
 	repoimplRepo := repoimpl2.NewPropertyRepo(options2)
 	config6 := tool.ExtractAwsBucketConfig(config)
+	config7 := tool.ExtractAwsConfig(config)
+	awsOptions := aws.Options{
+		Config: config7,
+	}
+	awsAws := aws.NewAwsClient(awsOptions)
 	bucketOptions := bucket.Options{
-		Config: config6,
+		Config:    config6,
+		AwsClient: awsAws,
 	}
 	bucketEngine := bucket.NewBucket(bucketOptions)
 	usecaseimplOptions := usecaseimpl.Options{
