@@ -15,10 +15,10 @@ func TestSeedPropertyType(t *testing.T) {
 	engine := gorm.NewORM(gorm.Options{Config: dbConfig})
 
 	awsConfig := env.ProvideEnv().Aws
-	aws := aws.NewConstruct(aws.Options{Config: awsConfig})
+	awsClient := aws.NewAwsClient(aws.Options{Config: awsConfig})
 
 	bucketConfig := awsConfig.Bucket
-	bucket := bucket.NewBucket(bucket.Options{Config: bucketConfig, AwsConstruct: aws})
+	bucket := bucket.NewBucket(bucket.Options{Config: bucketConfig, AwsClient: awsClient})
 
 	if err := SeedPropertyType(*engine.DB, *bucket); err != nil {
 		t.Error("failed to seed property type", err)
