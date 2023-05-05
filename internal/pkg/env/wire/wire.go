@@ -14,5 +14,6 @@ var PackageSet = wire.NewSet(
 	tool.ExtractKafkaConfig,
 	tool.ExtractKafkaConsumerConfig,
 	tool.ExtractKafkaRouterConfig,
+	tool.ExtractAwsConfig,
 	tool.ExtractAwsBucketConfig,
 )

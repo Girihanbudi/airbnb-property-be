@@ -2,6 +2,7 @@ package tool
 
 import (
 	awsbucket "airbnb-property-be/internal/pkg/aws/bucket/config"
+	aws "airbnb-property-be/internal/pkg/aws/config"
 	"airbnb-property-be/internal/pkg/env/config"
 	gorm "airbnb-property-be/internal/pkg/gorm/config"
 	httpServer "airbnb-property-be/internal/pkg/http/server/config"
@@ -28,6 +29,10 @@ func ExtractKafkaConsumerConfig(config config.Config) kafkaconsumer.Config {
 
 func ExtractKafkaRouterConfig(config config.Config) kafkarouter.Config {
 	return config.Kafka.Consumer.Router
+}
+
+func ExtractAwsConfig(config config.Config) aws.Config {
+	return config.Aws
 }
 
 func ExtractAwsBucketConfig(config config.Config) awsbucket.Config {
