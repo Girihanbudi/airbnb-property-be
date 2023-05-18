@@ -6,6 +6,7 @@ require (
 	github.com/99designs/gqlgen v0.17.25
 	github.com/Shopify/sarama v1.38.1
 	github.com/aws/aws-sdk-go v1.44.249
+	github.com/elastic/go-elasticsearch/v7 v7.17.10
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.9.0
 	github.com/go-playground/validator/v10 v10.12.0
