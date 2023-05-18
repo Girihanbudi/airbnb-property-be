@@ -3,6 +3,7 @@ package config
 import (
 	aws "airbnb-property-be/internal/pkg/aws/config"
 	cache "airbnb-property-be/internal/pkg/cache/config"
+	elastic "airbnb-property-be/internal/pkg/elasticsearch/config"
 	gorm "airbnb-property-be/internal/pkg/gorm/config"
 	httpserver "airbnb-property-be/internal/pkg/http/server/config"
 	jwt "airbnb-property-be/internal/pkg/jwt/config"
@@ -19,4 +20,5 @@ type Config struct {
 	Cache      cache.Config      `mapstructure:"cache"`
 	Kafka      kafka.Config      `mapstructure:"kafka"`
 	Aws        aws.Config        `mapstructure:"aws"`
+	Elastic    elastic.Config    `mapstructure:"elastic"`
 }
