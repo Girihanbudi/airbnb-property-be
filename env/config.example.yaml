@@ -3,6 +3,9 @@ origins:
 domain:
 mock:
   otp:
+creds:
+  privatekey:
+  publiccert:
 httpserver:
   host:
   port:
