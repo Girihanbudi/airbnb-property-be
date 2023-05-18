@@ -1,6 +1,8 @@
 stage:
 origins:
 domain:
+mock:
+  otp:
 httpserver:
   host:
   port:
@@ -41,3 +43,8 @@ aws:
   url:
   bucket:
     name:
+elastic:
+  addresses:
+  username:
+  password:
+  separator:
