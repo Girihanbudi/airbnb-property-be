@@ -25,6 +25,6 @@ type Server struct {
 func NewServer(options Options) *Server {
 	return &Server{
 		Options: options,
-		address: fmt.Sprintf("%s:%s", s.Host, s.Port)
+		address: fmt.Sprintf("%s:%s", options.Host, options.Port)
 	}
 }
