@@ -45,7 +45,7 @@ func (a App) Run(ctx context.Context) {
 }
 
 func (a App) runModules(ctx context.Context) {
-	log.Event(Instance, "Starting...")
+	log.Event(Instance, "Starting service and connections...")
 
 	// init app cache
 	auth.InitAuthCache()
@@ -77,36 +77,28 @@ func (a App) runModules(ctx context.Context) {
 	a.registerHttpHandler()
 
 	go func() {
-		err := a.HttpServer.Start()
-		if err != nil {
-			log.Fatal(Instance, "failed to start http server", err)
-		}
+		a.HttpServer.Start()
 	}()
 
 	<-ctx.Done()
 }
 
 func (a App) stopModules() {
-	log.Event(Instance, "Stoping...")
+	log.Event(Instance, "Stoping service and connections...")
 
 	var wg sync.WaitGroup
 
 	wg.Add(2)
 	go func() {
 		defer wg.Done()
-		err := a.EventProducer.Stop()
-		if err != nil {
-			log.Fatal(Instance, "failed to stop event producer", err)
-		}
+		a.EventProducer.Stop()
 	}()
 
 	go func() {
 		defer wg.Done()
-		err := a.HttpServer.Stop()
-		if err != nil {
-			log.Fatal(Instance, "failed to stop http server", err)
-		}
+		a.HttpServer.Stop()
 	}()
 
 	wg.Wait()
+	log.Event(Instance, "successfully stopped service and connections")
 }
