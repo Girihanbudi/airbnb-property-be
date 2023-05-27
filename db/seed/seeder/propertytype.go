@@ -8,11 +8,12 @@ import (
 )
 
 func SeedPropertyType(db gorm.DB, bucket bucket.Engine) error {
+	contentType := "image/svg+xml"
 	files := []UploadMeta{
-		MakeUploadMeta("near-beach", "./static/propertytype/near-beach.svg", "property_type", "near-beach"),
-		MakeUploadMeta("popular", "./static/propertytype/popular.svg", "property_type", "popular"),
-		MakeUploadMeta("room", "./static/propertytype/room.svg", "property_type", "room"),
-		MakeUploadMeta("tropical", "./static/propertytype/tropical.svg", "property_type", "tropical"),
+		MakeUploadMeta("near-beach", "./static/propertytype/near-beach.svg", &contentType, "property-type", "near-beach.svg"),
+		MakeUploadMeta("popular", "./static/propertytype/popular.svg", &contentType, "property-type", "popular.svg"),
+		MakeUploadMeta("room", "./static/propertytype/room.svg", &contentType, "property-type", "room.svg"),
+		MakeUploadMeta("tropical", "./static/propertytype/tropical.svg", &contentType, "property-type", "tropical.svg"),
 	}
 
 	keys, err := BulkUploadFromPath(bucket, files)
