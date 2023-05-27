@@ -20,7 +20,14 @@ func (u Usecase) CreatePropertyType(ctx context.Context, cmd request.CreatePrope
 		err = transutil.TranslateError(ctx, errpreset.DbServiceUnavailable, clientLocale)
 		return
 	}
-	fName, uploadErr := u.Bucket.Upload(cmd.BFile, module.BucketGroupName, fId)
+
+	types, ok := cmd.File.Header["Content-Type"]
+	var contentType string
+	if ok && len(types) > 0 {
+		contentType = types[0]
+	}
+
+	fName, uploadErr := u.Bucket.Upload(cmd.BFile, &contentType, module.BucketGroupName, fId)
 	if uploadErr != nil {
 		err = transutil.TranslateError(ctx, errpreset.DbServiceUnavailable, clientLocale)
 		return
