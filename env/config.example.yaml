@@ -39,6 +39,7 @@ aws:
   url:
   bucket:
     name:
+    separator:
 kafka:
   clientid:
   brokers:
