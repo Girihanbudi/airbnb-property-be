@@ -7,6 +7,7 @@ import (
 	"airbnb-property-be/internal/app/property/preset/request"
 	"airbnb-property-be/internal/app/property/preset/response"
 	transutil "airbnb-property-be/internal/app/translation/util"
+	"airbnb-property-be/internal/pkg/aws/bucket"
 	"airbnb-property-be/internal/pkg/stderror"
 	"context"
 
@@ -27,7 +28,7 @@ func (u Usecase) GetPropertyTypes(ctx context.Context, cmd request.GetPropertyTy
 
 		propertyType.Code = data.Code
 		propertyType.Name = data.Name
-		propertyType.Link = data.Code
+		propertyType.Link = bucket.GetLink(data.Link)
 		propertyType.CreatedAt = data.CreatedAt
 		propertyType.UpdatedAt = data.UpdatedAt
 
