@@ -1,6 +1,7 @@
 package bucket
 
 import (
+	"airbnb-property-be/internal/pkg/env"
 	"bytes"
 	"errors"
 	"fmt"
@@ -11,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 )
 
-func (e *Engine) Upload(file []byte, groups ...string) (*string, error) {
+func (e *Engine) Upload(file []byte, contentType *string, groups ...string) (*string, error) {
 	name, err := GetName(groups...)
 	if err != nil {
 		return nil, err
@@ -21,10 +22,11 @@ func (e *Engine) Upload(file []byte, groups ...string) (*string, error) {
 
 	// Upload the file to S3.
 	_, err = e.Uploader.Upload(&s3manager.UploadInput{
-		ACL:    aws.String("public-read"),
-		Bucket: aws.String(e.Name),
-		Key:    aws.String(name),
-		Body:   reader,
+		ACL:         aws.String("public-read"),
+		Bucket:      aws.String(e.Name),
+		Key:         aws.String(name),
+		Body:        reader,
+		ContentType: contentType,
 	})
 	if err != nil {
 		return nil, fmt.Errorf("failed to upload file, %v", err)
@@ -51,6 +53,10 @@ func (e *Engine) Download(fileName string) (*[]byte, error) {
 
 func GetName(groups ...string) (string, error) {
 	re := regexp.MustCompile(`[a-z\0-9\-\_]+`)
+	separator := env.CONFIG.Aws.Bucket.Separator
+	if separator == "" {
+		separator = "_"
+	}
 
 	var name string
 	for i, x := range groups {
@@ -61,7 +67,7 @@ func GetName(groups ...string) (string, error) {
 		if i == 0 {
 			name = x
 		} else {
-			name = name + "." + x
+			name = name + separator + x
 		}
 	}
 
