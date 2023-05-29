@@ -26,13 +26,14 @@ func graphqlHandler(propertyHandler gqlproperty.Handler) gin.HandlerFunc {
 }
 
 func (a App) registerHttpHandler() {
-	// register auth handler
+	// Register rest handler
 	a.PropertyRestHandler.RegisterApi()
 
-	// register modules to graph solver handler
+	// Register modules to graph solver handler
 	a.HttpServer.Router.GET("/graph", graphqlHandler(
 		*a.PropertyGqlHandler,
 	))
 
+	// Register swagger documentation
 	a.HttpServer.Router.GET("/docs/*any", ginswagger.WrapHandler(swaggerfiles.Handler))
 }
